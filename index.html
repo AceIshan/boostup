@@ -1,335 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoostUp - Your Daily Motivation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>BoostUp - Daily Motivation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+body {
+  background: linear-gradient(180deg, #f5f7fc 0%, #faf9ff 50%, #f7f9ff 100%);
+  min-height: 100vh;
+}
 
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #eef5ff, #f8fbff);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.hero-header {
+  background: linear-gradient(135deg, #c5d9f1 0%, #d4c5f9 25%, #e8d5f2 50%, #d9e5f6 75%, #c5d9f1 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(197, 217, 241, 0.2);
+}
 
-        .container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(200, 215, 230, 0.3);
-            padding: 50px;
-            max-width: 600px;
-            text-align: center;
-            animation: fadeInUp 0.8s ease;
-        }
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
 
-        h1 {
-            color: #2c5aa0;
-            font-size: 2.5em;
-            margin-bottom: 8px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
+.hero-header h1 {
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(100, 120, 200, 0.15);
+}
 
-        .subtitle {
-            color: #8b9dc3;
-            font-size: 0.9em;
-            margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-        }
+.hero-header p {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  opacity: 0.95;
+}
 
-        .buttons {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.category-btn {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 245, 255, 0.9)) !important;
+  color: #6b7fa8 !important;
+  border: 2px solid rgba(197, 217, 241, 0.6) !important;
+  padding: 14px 32px !important;
+  margin: 10px !important;
+  font-size: 15px !important;
+  font-weight: 400;
+  border-radius: 20px !important;
+  transition: all 0.4s ease !important;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(197, 217, 241, 0.1) !important;
+}
 
-        .buttons button {
-            padding: 12px 26px;
-            border: 1.5px solid #c8d7e6;
-            background-color: white;
-            color: #2c5aa0;
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-            min-width: 110px;
-            letter-spacing: 0.3px;
-        }
+.category-btn:hover {
+  background: linear-gradient(135deg, #e8f1fa, #d9e8f6) !important;
+  border-color: rgba(197, 217, 241, 1) !important;
+  box-shadow: 0 8px 25px rgba(197, 217, 241, 0.25) !important;
+  transform: translateY(-2px);
+}
 
-        .buttons button:active {
-            transform: scale(0.96);
-        }
+.category-btn.active {
+  background: linear-gradient(135deg, #c5d9f1 0%, #d4c5f9 100%) !important;
+  color: white !important;
+  border-color: rgba(197, 217, 241, 1) !important;
+  box-shadow: 0 8px 25px rgba(197, 217, 241, 0.35) !important;
+}
 
-        .buttons button:hover {
-            background-color: #e8f1fa;
-            color: #1a3a6e;
-            border-color: #4a90d9;
-            box-shadow: 0 3px 12px rgba(42, 97, 191, 0.12);
-        }
+.message-display {
+  background: linear-gradient(135deg, rgba(245, 250, 255, 0.8) 0%, rgba(232, 225, 249, 0.6) 50%, rgba(217, 229, 246, 0.8) 100%);
+  border: 1px solid rgba(197, 217, 241, 0.3);
+  border-radius: 20px;
+  padding: 50px 40px;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 22px;
+  color: #5a6a7a;
+  line-height: 1.8;
+  font-weight: 300;
+  box-shadow: 0 8px 32px rgba(197, 217, 241, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
 
-        .buttons button.active {
-            background-color: #2c5aa0;
-            color: white;
-            border-color: #2c5aa0;
-            box-shadow: 0 4px 12px rgba(42, 97, 191, 0.2);
-        }
+.action-btn {
+  background: linear-gradient(135deg, #c5d9f1 0%, #d4c5f9 100%) !important;
+  color: white !important;
+  padding: 14px 40px !important;
+  margin: 10px !important;
+  font-size: 15px !important;
+  font-weight: 400;
+  border-radius: 20px !important;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.4s ease !important;
+  box-shadow: 0 6px 20px rgba(197, 217, 241, 0.2) !important;
+}
 
-        #messageBox {
-            margin: 35px 0;
-            font-size: 18px;
-            color: #3a4a5c;
-            line-height: 1.7;
-            padding: 35px;
-            background: linear-gradient(135deg, #f0f5fa 0%, #e8f1f8 100%);
-            border-radius: 14px;
-            min-height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.5s ease;
-            border: 1px solid rgba(76, 144, 216, 0.15);
-            font-weight: 400;
-            box-shadow: 0 8px 25px rgba(42, 97, 191, 0.08);
-            opacity: 1;
-            transition: opacity 0.2s ease;
-        }
+.action-btn:hover {
+  background: linear-gradient(135deg, #b3c5e8 0%, #c8b3f0 100%) !important;
+  box-shadow: 0 10px 30px rgba(197, 217, 241, 0.3) !important;
+  transform: translateY(-2px);
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.action-btn:disabled {
+  background: linear-gradient(135deg, #dde5f0 0%, #e0d9e8 100%) !important;
+  cursor: not-allowed;
+  box-shadow: 0 4px 12px rgba(197, 217, 241, 0.1) !important;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.reset-btn {
+  background: linear-gradient(135deg, #d4c5f9 0%, #e8d5f2 100%) !important;
+}
 
-        .button-group {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.reset-btn:hover {
+  background: linear-gradient(135deg, #c8b3f0 0%, #dfc5e8 100%) !important;
+}
 
-        #newMessageBtn {
-            padding: 12px 30px;
-            background-color: #2c5aa0;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            min-width: 150px;
-            letter-spacing: 0.3px;
-        }
+footer {
+  background: linear-gradient(180deg, rgba(245, 250, 255, 0.6), rgba(240, 245, 255, 0.4));
+  color: #8b9dc3;
+  border-top: 1px solid rgba(197, 217, 241, 0.2);
+  backdrop-filter: blur(10px);
+}
 
-        #newMessageBtn:hover:not(:disabled) {
-            background-color: #1a3a6e;
-            box-shadow: 0 6px 16px rgba(42, 97, 191, 0.25);
-            transform: translateY(-1px);
-        }
-
-        #newMessageBtn:active:not(:disabled) {
-            transform: scale(0.96);
-        }
-
-        #newMessageBtn:disabled {
-            background-color: #cbd5e1;
-            cursor: not-allowed;
-        }
-
-        #resetBtn {
-            padding: 12px 30px;
-            background-color: #8b9dc3;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            min-width: 150px;
-            letter-spacing: 0.3px;
-        }
-
-        #resetBtn:hover {
-            background-color: #6b7fa8;
-            box-shadow: 0 6px 16px rgba(139, 157, 195, 0.25);
-            transform: translateY(-1px);
-        }
-
-        #resetBtn:active {
-            transform: scale(0.96);
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #9aa7bd;
-            font-weight: 400;
-            letter-spacing: 0.2px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 35px 25px;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .buttons {
-                flex-direction: column;
-            }
-
-            .buttons button {
-                width: 100%;
-                min-width: unset;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            #newMessageBtn, #resetBtn {
-                width: 100%;
-                min-width: unset;
-            }
-        }
-    </style>
+@media (max-width: 768px) {
+  .hero-header h1 {font-size: 32px;}
+  .hero-header p {font-size: 16px;}
+  .message-display {padding: 35px 25px; font-size: 18px;}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>✨ BoostUp</h1>
-        <p class="subtitle">Your daily motivation and confidence boost</p>
 
-        <div class="buttons">
-            <button onclick="showMessage('motivation')" aria-label="Get motivation message">💪 Motivation</button>
-            <button onclick="showMessage('confidence')" aria-label="Get confidence message">🌟 Confidence</button>
-            <button onclick="showMessage('stress')" aria-label="Get stress relief message">😌 Stress Relief</button>
-        </div>
+<div class="hero-header">
+  <h1>✨ BoostUp</h1>
+  <p>Your daily motivation and confidence boost</p>
+</div>
 
-        <div id="messageBox">Click a category to get started</div>
+<div class="w3-container" style="max-width:1000px;margin:20px auto;">
 
-        <div class="button-group">
-            <button id="newMessageBtn" onclick="newMessage()" disabled>🔄 New Message</button>
-            <button id="resetBtn" onclick="resetApp()">↺ Reset</button>
-        </div>
-        
-        <p class="footer">Built to promote positivity and support student wellbeing</p>
-    </div>
+  <div class="w3-center">
+    <button class="w3-button category-btn" onclick="showMessage('motivation')">Motivation</button>
+    <button class="w3-button category-btn" onclick="showMessage('confidence')">Confidence</button>
+    <button class="w3-button category-btn" onclick="showMessage('stress')">Serenity</button>
+  </div>
 
-    <script>
-        let currentCategory = "";
+  <div class="w3-margin-top w3-margin-bottom">
+    <div id="messageBox" class="message-display">Click a category to get started</div>
+  </div>
 
-        const messages = {
-            motivation: [
-                "Keep going, you're doing better than you think.",
-                "Small steps still move you forward.",
-                "You have the strength to finish what you started.",
-                "Your effort today is building your future tomorrow.",
-                "Progress, not perfection, is what matters.",
-                "Every accomplishment begins with the decision to try.",
-                "You're closer to your goals than you were yesterday.",
-                "Your potential is limitless when you believe in it.",
-                "Success is the sum of small efforts repeated day in and day out."
-            ],
-            confidence: [
-                "Believe in yourself, you are capable.",
-                "You are stronger than your doubts.",
-                "Confidence grows with every step you take.",
-                "You've overcome challenges before, you can do it again.",
-                "Your voice matters and your ideas are valuable.",
-                "You are enough, exactly as you are right now.",
-                "Trust yourself, you know more than you think.",
-                "You have unique talents that only you can offer.",
-                "Stand tall—you've earned the right to feel proud."
-            ],
-            stress: [
-                "Take a deep breath, you've got this.",
-                "It's okay to take a break.",
-                "You don't have to figure everything out today.",
-                "One step at a time is all you need.",
-                "Your wellbeing is more important than perfection.",
-                "It's okay to ask for help when you need it.",
-                "This moment is temporary, and you will get through it.",
-                "Pause, breathe, and remember what truly matters.",
-                "You're doing your best, and that is enough."
-            ]
-        };
+  <div class="w3-center">
+    <button id="newMessageBtn" class="w3-button action-btn" onclick="newMessage()" disabled>Another Message</button>
+    <button id="resetBtn" class="w3-button action-btn reset-btn" onclick="resetApp()">Clear</button>
+  </div>
 
-        function showMessage(category) {
-            currentCategory = category;
-            updateButtonStates(category);
-            document.getElementById("newMessageBtn").disabled = false;
-            newMessage();
-        }
+  <div class="w3-margin-top" style="height: 1px; background: #e0e5eb;"></div>
 
-        function newMessage() {
-            if (currentCategory === "") return;
+</div>
 
-            const messageBox = document.getElementById("messageBox");
-            const list = messages[currentCategory];
-            let randomIndex = Math.floor(Math.random() * list.length);
-            
-            while (list[randomIndex] === messageBox.innerText && list.length > 1) {
-                randomIndex = Math.floor(Math.random() * list.length);
-            }
-            
-            messageBox.style.opacity = 0;
-            
-            setTimeout(() => {
-                messageBox.innerText = list[randomIndex];
-                messageBox.style.opacity = 1;
-            }, 200);
-        }
+<footer class="w3-padding-32 w3-small w3-center" style="margin-top:40px;">
+  <p style="margin:0;color:#8b9dc3;font-weight:300;letter-spacing:0.3px;">Built to promote positivity and support student wellbeing</p>
+  <p style="margin:10px 0 0 0;font-size:12px;">© 2026 BoostUp Project | IB Design</p>
+</footer>
 
-        function resetApp() {
-            currentCategory = "";
-            document.getElementById("messageBox").innerText = "Click a category to get started";
-            document.getElementById("newMessageBtn").disabled = true;
-            updateButtonStates("");
-        }
+<script>
+let currentCategory = "";
 
-        function updateButtonStates(activeCategory) {
-            document.querySelectorAll(".buttons button").forEach(btn => {
-                btn.classList.remove("active");
-            });
-            if (activeCategory) {
-                event.target.classList.add("active");
-            }
-        }
-    </script>
+const messages = {
+  motivation: [
+    "Keep going, you're doing better than you think.",
+    "Small steps still move you forward.",
+    "You have the strength to finish what you started.",
+    "Your effort today is building your future tomorrow.",
+    "Progress, not perfection, is what matters.",
+    "Every accomplishment begins with the decision to try.",
+    "You're closer to your goals than you were yesterday.",
+    "Your potential is limitless when you believe in it.",
+    "Success is the sum of small efforts repeated day in and day out."
+  ],
+  confidence: [
+    "Believe in yourself, you are capable.",
+    "You are stronger than your doubts.",
+    "Confidence grows with every step you take.",
+    "You've overcome challenges before, you can do it again.",
+    "Your voice matters and your ideas are valuable.",
+    "You are enough, exactly as you are right now.",
+    "Trust yourself, you know more than you think.",
+    "You have unique talents that only you can offer.",
+    "Stand tall—you've earned the right to feel proud."
+  ],
+  stress: [
+    "Take a deep breath, you've got this.",
+    "It's okay to take a break.",
+    "You don't have to figure everything out today.",
+    "One step at a time is all you need.",
+    "Your wellbeing is more important than perfection.",
+    "It's okay to ask for help when you need it.",
+    "This moment is temporary, and you will get through it.",
+    "Pause, breathe, and remember what truly matters.",
+    "You're doing your best, and that is enough."
+  ]
+};
+
+function showMessage(category) {
+  currentCategory = category;
+  updateButtonStates(category);
+  document.getElementById("newMessageBtn").disabled = false;
+  newMessage();
+}
+
+function newMessage() {
+  if (currentCategory === "") return;
+
+  const messageBox = document.getElementById("messageBox");
+  const list = messages[currentCategory];
+  let randomIndex = Math.floor(Math.random() * list.length);
+  
+  while (list[randomIndex] === messageBox.innerText && list.length > 1) {
+    randomIndex = Math.floor(Math.random() * list.length);
+  }
+  
+  messageBox.style.opacity = 0;
+  
+  setTimeout(() => {
+    messageBox.innerText = list[randomIndex];
+    messageBox.style.opacity = 1;
+  }, 200);
+}
+
+function resetApp() {
+  currentCategory = "";
+  document.getElementById("messageBox").innerText = "Click a category to get started";
+  document.getElementById("newMessageBtn").disabled = true;
+  updateButtonStates("");
+}
+
+function updateButtonStates(activeCategory) {
+  document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  const buttons = document.querySelectorAll(".category-btn");
+  for (let btn of buttons) {
+    if (btn.innerText.includes(activeCategory === 'motivation' ? 'Motivation' : 
+                               activeCategory === 'confidence' ? 'Confidence' : 
+                               activeCategory === 'stress' ? 'Stress' : '')) {
+      btn.classList.add("active");
+      break;
+    }
+  }
+}
+</script>
 
 </body>
 </html>
