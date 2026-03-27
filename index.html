@@ -189,7 +189,17 @@ const messages = {
     "Every accomplishment begins with the decision to try.",
     "You're closer to your goals than you were yesterday.",
     "Your potential is limitless when you believe in it.",
-    "Success is the sum of small efforts repeated day in and day out."
+    "Success is the sum of small efforts repeated day in and day out.",
+    "Dream big, start small, and never stop.",
+    "Your journey is unique—embrace it.",
+    "Challenges are opportunities in disguise.",
+    "Believe you can, and you're halfway there.",
+    "Every day is a new chance to shine.",
+    "Your hard work will pay off in ways you can't imagine.",
+    "Stay focused on your path, not the obstacles.",
+    "You are the architect of your own success.",
+    "One positive thought can change your day.",
+    "Keep pushing—great things take time."
   ],
   confidence: [
     "Believe in yourself, you are capable.",
@@ -200,7 +210,17 @@ const messages = {
     "You are enough, exactly as you are right now.",
     "Trust yourself, you know more than you think.",
     "You have unique talents that only you can offer.",
-    "Stand tall—you've earned the right to feel proud."
+    "Stand tall—you've earned the right to feel proud.",
+    "Your confidence inspires others around you.",
+    "You have the power to create change.",
+    "Embrace your strengths—they make you special.",
+    "You are worthy of every opportunity that comes your way.",
+    "Self-belief is the key to unlocking your potential.",
+    "You shine brightest when you believe in yourself.",
+    "Your courage defines you, not your fears.",
+    "You are a force for good in the world.",
+    "Trust the process—confidence builds over time.",
+    "You have everything you need within you."
   ],
   stress: [
     "Take a deep breath, you've got this.",
@@ -211,12 +231,37 @@ const messages = {
     "It's okay to ask for help when you need it.",
     "This moment is temporary, and you will get through it.",
     "Pause, breathe, and remember what truly matters.",
-    "You're doing your best, and that is enough."
+    "You're doing your best, and that is enough.",
+    "Let go of what you can't control.",
+    "Your peace of mind is a priority.",
+    "Breathe in calm, breathe out stress.",
+    "You are resilient and capable of handling this.",
+    "Take time for yourself—you deserve it.",
+    "Worrying doesn't change the outcome, action does.",
+    "Find joy in the small moments.",
+    "You are stronger than any challenge.",
+    "Rest when you need to, recharge when you can.",
+    "This too shall pass—focus on the present."
   ]
 };
 
+let shuffledMessages = {};
+let messageIndices = {};
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function showMessage(category) {
   currentCategory = category;
+  if (!shuffledMessages[category]) {
+    shuffledMessages[category] = [...messages[category]];
+    shuffleArray(shuffledMessages[category]);
+    messageIndices[category] = 0;
+  }
   updateButtonStates(category);
   document.getElementById("newMessageBtn").disabled = false;
   newMessage();
@@ -226,17 +271,19 @@ function newMessage() {
   if (currentCategory === "") return;
 
   const messageBox = document.getElementById("messageBox");
-  const list = messages[currentCategory];
-  let randomIndex = Math.floor(Math.random() * list.length);
+  const list = shuffledMessages[currentCategory];
+  const message = list[messageIndices[currentCategory]];
   
-  while (list[randomIndex] === messageBox.innerText && list.length > 1) {
-    randomIndex = Math.floor(Math.random() * list.length);
+  messageIndices[currentCategory]++;
+  if (messageIndices[currentCategory] >= list.length) {
+    shuffleArray(list);
+    messageIndices[currentCategory] = 0;
   }
   
   messageBox.style.opacity = 0;
   
   setTimeout(() => {
-    messageBox.innerText = list[randomIndex];
+    messageBox.innerText = message;
     messageBox.style.opacity = 1;
   }, 200);
 }
@@ -256,7 +303,7 @@ function updateButtonStates(activeCategory) {
   for (let btn of buttons) {
     if (btn.innerText.includes(activeCategory === 'motivation' ? 'Motivation' : 
                                activeCategory === 'confidence' ? 'Confidence' : 
-                               activeCategory === 'stress' ? 'Stress' : '')) {
+                               activeCategory === 'stress' ? 'Serenity' : '')) {
       btn.classList.add("active");
       break;
     }
